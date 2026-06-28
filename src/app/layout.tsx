@@ -15,7 +15,11 @@ const nunito = Nunito_Sans({
 
 export const metadata: Metadata = {
   title: "The Batthi Royal Dynasty",
-  description: "A public family tree with branch views and profile pages."
+  description: "A public family tree with branch views and profile pages.",
+  robots: {
+    index: false,
+    follow: false
+  }
 };
 
 export default function RootLayout({
