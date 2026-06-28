@@ -27,7 +27,7 @@ export default async function HomePage() {
       </div>
 
       <div id="family-graph" className="tree-stage">
-        <FamilyTreeGraph tree={familyTree} overrides={overrides} />
+        <FamilyTreeGraph tree={familyTree} overrides={overrides} defaultZoom={0.55} />
       </div>
     </section>
   );

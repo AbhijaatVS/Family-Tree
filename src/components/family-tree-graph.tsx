@@ -8,6 +8,7 @@ import { getPerson } from "@/lib/family-data";
 interface TreeGraphProps {
   tree: TreeNode;
   overrides?: Record<string, { name?: string; photo?: string; birthday?: string }>;
+  defaultZoom?: number;
 }
 
 function FamilyTreeNode({
@@ -58,7 +59,7 @@ function FamilyTreeNode({
   );
 }
 
-export function FamilyTreeGraph({ tree, overrides }: TreeGraphProps) {
+export function FamilyTreeGraph({ tree, overrides, defaultZoom }: TreeGraphProps) {
   const shellRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
   // null = not yet calculated; will be set after first render
@@ -100,8 +101,7 @@ export function FamilyTreeGraph({ tree, overrides }: TreeGraphProps) {
 
   // Auto-fit on first mount + whenever the tree changes
   useEffect(() => {
-    // Two-pass: first render at zoom=1 to get natural size, then set fit zoom
-    const fit = calcFitZoom();
+    const fit = defaultZoom ?? calcFitZoom();
     setZoom(fit);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tree]);
