@@ -686,46 +686,4 @@ main {
     padding: 16px 16px 20px;
   }
 
-  .graph-card {
-    min-width: min(100%, 340px);
-    width: 100%;
-  }
-
-  .graph-members {
-    grid-template-columns: 1fr;
-  }
-
-  .graph-member {
-    min-height: 128px;
-    grid-template-columns: 76px 1fr;
-    justify-items: start;
-    text-align: left;
-  }
-
-  .graph-member-photoWrap {
-    width: 64px;
-    height: 64px;
-  }
-
-  .graph-children {
-    flex-direction: column;
-    align-items: stretch;
-    padding-top: 18px;
-  }
-
-  .graph-children::before,
-  .graph-children > .tree-subtree::before,
-  .graph-children > .tree-subtree::after,
-  .tree-subtree > .graph-card::after {
-    display: none;
-  }
-
-  .tree-subtree {
-    width: 100%;
-    align-items: stretch;
-  }
-
-  .graph-card {
-    width: 100%;
-  }
 }
