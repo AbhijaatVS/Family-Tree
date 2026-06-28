@@ -13,11 +13,13 @@ interface TreeGraphProps {
 function FamilyTreeNode({
   node,
   isRoot = false,
-  overrides
+  overrides,
+  depth = 0
 }: {
   node: TreeNode;
   isRoot?: boolean;
   overrides?: Record<string, { photo?: string }>;
+  depth?: number;
 }) {
   return (
     <div className={`tree-subtree${isRoot ? " tree-root" : ""}`}>
@@ -27,7 +29,7 @@ function FamilyTreeNode({
             const overridePhoto = overrides?.[member.slug]?.photo;
             const defaultPhoto = getPerson(member.slug)?.photo;
             return (
-              <Link key={member.slug} href={`/profile/${member.slug}`} className="graph-member">
+              <Link key={member.slug} href={`/profile/${member.slug}`} className={`graph-member graph-member--level-${depth}`}>
                 <span className="graph-member-photoWrap">
                   <img
                     src={overridePhoto || defaultPhoto}
@@ -47,7 +49,7 @@ function FamilyTreeNode({
       {node.children.length > 0 ? (
         <div className="graph-children">
           {node.children.map((child) => (
-            <FamilyTreeNode key={child.id} node={child} overrides={overrides} />
+            <FamilyTreeNode key={child.id} node={child} overrides={overrides} depth={depth + 1} />
           ))}
         </div>
       ) : null}

@@ -1,16 +1,16 @@
 :root {
-  --bg: #f4f7fa;
-  --bg-soft: #e9f0f6;
-  --panel: rgba(240, 246, 252, 0.84);
+  --bg: #faf9f2;
+  --bg-soft: #f6f3e5;
+  --panel: rgba(253, 251, 212, 0.82);
   --panel-strong: #ffffff;
-  --text: #233240;
-  --muted: #5a6e80;
-  --accent: #6a89a7;
-  --accent-2: #384959;
-  --accent-3: #bdddfc;
-  --accent-4: #1b2936;
-  --border: rgba(56, 73, 89, 0.15);
-  --shadow: 0 22px 60px rgba(56, 73, 89, 0.08);
+  --text: #352a1d;
+  --muted: #857461;
+  --accent: #ce8946;
+  --accent-2: #a86c35;
+  --accent-3: #d4af37;
+  --accent-4: #4f3e2d;
+  --border: rgba(206, 137, 70, 0.16);
+  --shadow: 0 22px 60px rgba(107, 93, 78, 0.1);
 }
 
 * {
@@ -25,8 +25,8 @@ body {
   margin: 0;
   color: var(--text);
   background:
-    radial-gradient(circle at top left, rgba(106, 137, 167, 0.22), transparent 28%),
-    radial-gradient(circle at top right, rgba(189, 221, 252, 0.26), transparent 24%),
+    radial-gradient(circle at top left, rgba(206, 137, 70, 0.2), transparent 28%),
+    radial-gradient(circle at top right, rgba(212, 175, 55, 0.22), transparent 24%),
     linear-gradient(180deg, var(--bg-soft), var(--bg));
   font-family: var(--font-body), sans-serif;
 }
@@ -36,8 +36,8 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image: linear-gradient(rgba(56, 73, 89, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56, 73, 89, 0.04) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(206, 137, 70, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(206, 137, 70, 0.04) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), transparent 95%);
 }
@@ -307,8 +307,8 @@ main {
   align-items: center;
   padding: 8px 12px;
   border-radius: 999px;
-  background: rgba(106, 137, 167, 0.12);
-  color: #384959;
+  background: rgba(206, 137, 70, 0.12);
+  color: #a86c35;
   font-weight: 700;
 }
 
@@ -406,9 +406,9 @@ main {
   border-radius: 34px;
   border: 1px solid var(--border);
   background:
-    radial-gradient(circle at top left, rgba(189, 221, 252, 0.22), transparent 32%),
-    radial-gradient(circle at bottom right, rgba(106, 137, 167, 0.12), transparent 28%),
-    linear-gradient(180deg, rgba(253, 254, 255, 0.96), rgba(240, 246, 252, 0.92));
+    radial-gradient(circle at top left, rgba(212, 175, 55, 0.18), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(206, 137, 70, 0.12), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 253, 0.96), rgba(253, 251, 212, 0.9));
   box-shadow: var(--shadow);
   overscroll-behavior: contain;
   scrollbar-gutter: stable both-edges;
@@ -476,15 +476,37 @@ main {
   text-align: center;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 10px 22px rgba(67, 19, 18, 0.18);
+  box-shadow: 0 10px 22px rgba(107, 93, 78, 0.18);
   transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+.graph-member--level-0 {
+  background: linear-gradient(180deg, #ce8946, #a86c35);
+}
+
+.graph-member--level-1 {
+  background: linear-gradient(180deg, #d4af37, #b79223);
+}
+
+.graph-member--level-2 {
+  background: linear-gradient(180deg, #bdb76b, #9b954d);
+}
+
+.graph-member--level-3 {
+  background: linear-gradient(180deg, #a88d6f, #8c7153);
+}
+
+.graph-member--level-4,
+.graph-member--level-5,
+.graph-member--level-6 {
+  background: linear-gradient(180deg, #857461, #695a4a);
 }
 
 .graph-member:hover,
 .graph-member:focus-visible {
   transform: translateY(-2px);
   filter: brightness(1.04);
-  box-shadow: 0 14px 28px rgba(67, 19, 18, 0.24);
+  box-shadow: 0 14px 28px rgba(107, 93, 78, 0.24);
   outline: none;
 }
 

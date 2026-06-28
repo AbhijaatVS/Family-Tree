@@ -266,12 +266,12 @@ function hashString(value: string) {
 function avatarDataUrl(name: string, branch: string) {
   const seed = `${name}-${branch}`;
   const hash = hashString(seed);
-  const hue = 200 + (hash % 40);
-  const sat = 25 + (hash % 15);
-  const light = 42 + (hash % 12);
-  const secHue = 200 + ((hash + 20) % 40);
-  const secSat = 20 + (hash % 15);
-  const secLight = 30 + (hash % 10);
+  const hue = 32 + (hash % 30);
+  const sat = 45 + (hash % 15);
+  const light = 45 + (hash % 10);
+  const secHue = 32 + ((hash + 15) % 30);
+  const secSat = 35 + (hash % 15);
+  const secLight = 32 + (hash % 8);
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
       <defs>

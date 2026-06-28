@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { familyMembers, getChildrenOf } from "@/lib/family-data";
 import { getPersonWithOverrides } from "@/lib/profile-service";
+import { SocialIcon } from "@/components/social-icon";
 
 export default async function ProfilePage({
   params
@@ -44,9 +45,10 @@ export default async function ProfilePage({
 
         <div className="section">
           <h2 className="section-title">Social links</h2>
-          <div className="social-grid">
+          <div className="social-grid" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))" }}>
             {person.socials.map((social) => (
-              <a key={social.label} href={social.href} className="button-ghost" target="_blank" rel="noreferrer">
+              <a key={social.label} href={social.href} className="button-ghost" target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "8px", justifyContent: "center" }}>
+                <SocialIcon label={social.label} />
                 {social.label}
               </a>
             ))}
