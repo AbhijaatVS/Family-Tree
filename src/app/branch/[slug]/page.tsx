@@ -38,9 +38,6 @@ export default async function BranchPage({ params }: BranchPageProps) {
           <Link href="/" className="button-ghost">
             View full tree
           </Link>
-          <a href="#family-graph" className="button-ghost">
-            Jump to tree
-          </a>
         </div>
       </div>
 

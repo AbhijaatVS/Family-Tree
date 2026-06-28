@@ -23,9 +23,6 @@ export default async function HomePage() {
         </div>
         <div className="header-actions">
           <BranchSelector branches={branches} />
-          <a href="#family-graph" className="button-ghost">
-            Jump to tree
-          </a>
         </div>
       </div>
 

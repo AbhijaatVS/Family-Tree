@@ -447,14 +447,15 @@ main {
   box-shadow: var(--shadow);
 }
 
-.tree-subtree > .graph-card::after {
+.tree-subtree:not(.tree-leaf) > .graph-card::after {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: -18px;
-  width: 2px;
-  height: 18px;
-  background: var(--border);
+  transform: translateX(-50%);
+  bottom: -11px;
+  width: 3px;
+  height: 11px;
+  background: var(--accent-2);
 }
 
 .graph-members {
@@ -551,33 +552,28 @@ main {
 }
 
 .graph-children::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 2px;
-  height: 30px;
-  background: var(--border);
+  display: none;
 }
 
 .graph-children > .tree-subtree::before {
   content: "";
   position: absolute;
-  top: -14px;
+  top: -11px;
   left: 50%;
-  width: 2px;
-  height: 14px;
-  background: var(--border);
+  transform: translateX(-50%);
+  width: 3px;
+  height: 11px;
+  background: var(--accent-2);
 }
 
 .graph-children > .tree-subtree::after {
   content: "";
   position: absolute;
-  top: -14px;
+  top: -11px;
   left: 0;
   right: 0;
-  height: 2px;
-  background: var(--border);
+  height: 3px;
+  background: var(--accent-2);
 }
 
 .graph-children > .tree-subtree:first-child::after {
@@ -589,8 +585,7 @@ main {
 }
 
 .graph-children > .tree-subtree:only-child::after {
-  left: 50%;
-  right: 50%;
+  display: none;
 }
 
 .form-grid {

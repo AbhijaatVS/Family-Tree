@@ -22,7 +22,7 @@ function FamilyTreeNode({
   depth?: number;
 }) {
   return (
-    <div className={`tree-subtree${isRoot ? " tree-root" : ""}`}>
+    <div className={`tree-subtree${isRoot ? " tree-root" : ""}${node.children.length === 0 ? " tree-leaf" : ""}`}>
       <article className="graph-card">
         <div className="graph-members">
           {node.members.map((member) => {

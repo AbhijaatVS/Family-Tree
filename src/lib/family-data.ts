@@ -58,7 +58,7 @@ const rawFamilyTree: RawTreeNode = {
           ]
         },
         {
-          members: ["Nilima Singh", "Lt. Abhaya Singh"],
+          members: ["Nilima Singh", "Abhaya Singh"],
           children: [
             { members: ["Saurabh Singh", "Puja"], children: [] },
             {
@@ -134,7 +134,7 @@ const rawFamilyTree: RawTreeNode = {
       members: ["Gayatri Singh", "Late RP Singh"],
       children: [
         {
-          members: ["Lt. Ravi Prakash Singh", "Neerja Singh"],
+          members: ["Ravi Prakash Singh", "Neerja Singh"],
           children: [
             { members: ["Richa Singh", "Vivek"], children: [{ members: ["Vivan"], children: [] }] },
             { members: ["Ruchir Singh", "Srishti"], children: [{ members: ["Rudvik Pratap"], children: [] }] }
@@ -150,7 +150,7 @@ const rawFamilyTree: RawTreeNode = {
           children: [{ members: ["Sibbu Shivendra Bahadur", "Shivangi"], children: [] }]
         },
         {
-          members: ["Dr. Neeraj Singh", "Lt. Dr. Amita Singh"],
+          members: ["Dr. Neeraj Singh", "Dr. Amita Singh"],
           children: [
             { members: ["Chitrangda Singh", "Keval Shah"], children: [] },
             { members: ["Shruti Singh"], children: [] }
@@ -171,7 +171,7 @@ const rawFamilyTree: RawTreeNode = {
       children: [
         { members: ["Sanjaya Singh", "Anu Singh"], children: [{ members: ["Ajit Singh"], children: [] }] },
         {
-          members: ["Archana Singh", "Lt. Jitendra Bahadur Singh"],
+          members: ["Archana Singh", "Jitendra Bahadur Singh"],
           children: [
             { members: ["Chitrangda Singh", "Lokesh"], children: [{ members: ["Ameika Singh"], children: [] }] },
             {
