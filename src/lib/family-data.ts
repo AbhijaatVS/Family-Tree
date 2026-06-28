@@ -87,7 +87,10 @@ const rawFamilyTree: RawTreeNode = {
         {
           members: ["Sushma Singh", "R.P. Singh"],
           children: [
-            { members: ["Siddharth Singh", "Pratibha"], children: [] },
+            {
+              members: ["Siddharth Singh", "Pratibha"],
+              children: [{ members: ["child"], children: [] }]
+            },
             { members: ["Shevangae Singh"], children: [] }
           ]
         }

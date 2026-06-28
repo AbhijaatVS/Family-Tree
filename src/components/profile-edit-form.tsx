@@ -10,6 +10,7 @@ interface ProfileEditFormProps {
   saveAction: (
     slug: string,
     data: {
+      name: string;
       title: string;
       about: string;
       photo: string;
@@ -20,6 +21,7 @@ interface ProfileEditFormProps {
 
 export function ProfileEditForm({ person, saveAction }: ProfileEditFormProps) {
   const router = useRouter();
+  const [name, setName] = useState(person.name);
   const [title, setTitle] = useState(person.title);
   const [about, setAbout] = useState(person.about);
   const [photoMode, setPhotoMode] = useState<"url" | "upload">(
@@ -69,6 +71,7 @@ export function ProfileEditForm({ person, saveAction }: ProfileEditFormProps) {
 
     try {
       const result = await saveAction(person.slug, {
+        name,
         title,
         about,
         photo: finalPhoto,
@@ -104,8 +107,15 @@ export function ProfileEditForm({ person, saveAction }: ProfileEditFormProps) {
       <form onSubmit={handleSubmit} className="editor-form">
         <div className="form-grid">
           <div className="field">
-            <label style={{ fontWeight: "700" }}>Full Name</label>
-            <input type="text" value={person.name} disabled style={{ background: "#f5ece5", cursor: "not-allowed" }} />
+            <label htmlFor="name-input" style={{ fontWeight: "700" }}>Full Name</label>
+            <input
+              id="name-input"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter full name"
+              required
+            />
           </div>
 
           <div className="field">

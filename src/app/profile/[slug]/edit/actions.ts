@@ -7,6 +7,7 @@ import type { SocialLink } from "@/lib/family-data";
 export async function saveProfile(
   slug: string,
   data: {
+    name?: string;
     title: string;
     about: string;
     photo: string;

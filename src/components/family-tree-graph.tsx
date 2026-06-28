@@ -7,7 +7,7 @@ import { getPerson } from "@/lib/family-data";
 
 interface TreeGraphProps {
   tree: TreeNode;
-  overrides?: Record<string, { photo?: string }>;
+  overrides?: Record<string, { name?: string; photo?: string }>;
 }
 
 function FamilyTreeNode({
@@ -18,7 +18,7 @@ function FamilyTreeNode({
 }: {
   node: TreeNode;
   isRoot?: boolean;
-  overrides?: Record<string, { photo?: string }>;
+  overrides?: Record<string, { name?: string; photo?: string }>;
   depth?: number;
 }) {
   return (
@@ -26,6 +26,7 @@ function FamilyTreeNode({
       <article className="graph-card">
         <div className="graph-members">
           {node.members.map((member) => {
+            const overrideName = overrides?.[member.slug]?.name;
             const overridePhoto = overrides?.[member.slug]?.photo;
             const defaultPhoto = getPerson(member.slug)?.photo;
             return (
@@ -33,12 +34,12 @@ function FamilyTreeNode({
                 <span className="graph-member-photoWrap">
                   <img
                     src={overridePhoto || defaultPhoto}
-                    alt={member.name}
+                    alt={overrideName || member.name}
                     className="graph-member-photo"
                     loading={isRoot ? "eager" : "lazy"}
                   />
                 </span>
-                <span className="graph-member-name">{member.name}</span>
+                <span className="graph-member-name">{overrideName || member.name}</span>
               </Link>
             );
           })}

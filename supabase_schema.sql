@@ -1,6 +1,7 @@
 -- Create profiles table to store dynamic updates/overrides
 create table if not exists public.profiles (
   slug text primary key,
+  name text,
   title text,
   about text,
   photo_url text,

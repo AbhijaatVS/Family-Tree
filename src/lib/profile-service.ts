@@ -4,6 +4,7 @@ import { createServerSupabaseClient } from "./supabase/server";
 import { getPerson, Person, SocialLink } from "./family-data";
 
 export interface ProfileOverride {
+  name?: string;
   title?: string;
   about?: string;
   photo?: string;
@@ -61,7 +62,7 @@ export async function getProfileOverrides(): Promise<Record<string, ProfileOverr
     try {
       const { data: profiles, error: profileError } = await supabase
         .from("profiles")
-        .select("slug, title, about, photo_url");
+        .select("slug, name, title, about, photo_url");
 
       if (profileError) throw profileError;
 
@@ -75,6 +76,7 @@ export async function getProfileOverrides(): Promise<Record<string, ProfileOverr
 
       for (const p of profiles || []) {
         overrides[p.slug] = {
+          name: p.name || undefined,
           title: p.title || undefined,
           about: p.about || undefined,
           photo: p.photo_url || undefined,
@@ -111,6 +113,7 @@ export async function getPersonWithOverrides(slug: string): Promise<Person | nul
   if (override) {
     return {
       ...person,
+      name: override.name !== undefined ? (override.name ?? person.name) : person.name,
       title: override.title !== undefined ? (override.title ?? person.title) : person.title,
       about: override.about !== undefined ? (override.about ?? person.about) : person.about,
       photo: override.photo !== undefined ? (override.photo ?? person.photo) : person.photo,
@@ -124,6 +127,7 @@ export async function getPersonWithOverrides(slug: string): Promise<Person | nul
 export async function updateProfile(
   slug: string,
   data: {
+    name?: string;
     title?: string;
     about?: string;
     photo?: string;
@@ -136,6 +140,7 @@ export async function updateProfile(
     try {
       const { error: profileError } = await supabase.from("profiles").upsert({
         slug,
+        name: data.name,
         title: data.title,
         about: data.about,
         photo_url: data.photo,
@@ -172,6 +177,7 @@ export async function updateProfile(
 
   const localOverrides = readLocalOverrides();
   localOverrides[slug] = {
+    name: data.name,
     title: data.title,
     about: data.about,
     photo: data.photo,
