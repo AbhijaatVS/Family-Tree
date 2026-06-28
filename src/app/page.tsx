@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FamilyTreeGraph } from "@/components/family-tree-graph";
 import { BranchSelector } from "@/components/branch-selector";
-import { familyTree } from "@/lib/family-data";
+import { familyTree, countMembers } from "@/lib/family-data";
 import { getProfileOverrides } from "@/lib/profile-service";
 
 export default async function HomePage() {
@@ -17,7 +17,7 @@ export default async function HomePage() {
     <section className="tree-page tree-page--viewport">
       <div className="tree-header">
         <div>
-          <div className="pill" style={{ marginBottom: "8px" }}>Family tree</div>
+          <div className="pill" style={{ marginBottom: "8px" }}>Family tree • {countMembers(familyTree)} members</div>
           <h1 className="section-title">Sri Shiv Niranjan Singh & Dhanvantri Devi</h1>
           <p className="helper">Tap any name below to open that profile.</p>
         </div>

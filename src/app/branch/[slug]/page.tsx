@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FamilyTreeGraph } from "@/components/family-tree-graph";
 import { BranchSelector } from "@/components/branch-selector";
-import { familyTree, findNodeBySlug } from "@/lib/family-data";
+import { familyTree, findNodeBySlug, countMembers } from "@/lib/family-data";
 import { getProfileOverrides } from "@/lib/profile-service";
 
 interface BranchPageProps {
@@ -29,7 +29,7 @@ export default async function BranchPage({ params }: BranchPageProps) {
     <section className="tree-page tree-page--viewport">
       <div className="tree-header">
         <div>
-          <div className="pill" style={{ marginBottom: "8px" }}>Branch view</div>
+          <div className="pill" style={{ marginBottom: "8px" }}>Branch view • {countMembers(branchTree)} members</div>
           <h1 className="section-title">{branchName} Branch</h1>
           <p className="helper">Viewing the lineage of {branchName}.</p>
         </div>

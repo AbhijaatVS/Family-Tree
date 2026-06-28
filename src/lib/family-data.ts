@@ -131,7 +131,7 @@ const rawFamilyTree: RawTreeNode = {
       ]
     },
     {
-      members: ["Gayatri Singh", "Late RP Singh"],
+      members: ["Gayatri Singh", "RP Singh"],
       children: [
         {
           members: ["Ravi Prakash Singh", "Neerja Singh"],
@@ -392,4 +392,12 @@ export function findNodeBySlug(node: TreeNode, slug: string): TreeNode | null {
     if (found) return found;
   }
   return null;
+}
+
+export function countMembers(node: TreeNode): number {
+  let count = node.members.length;
+  for (const child of node.children) {
+    count += countMembers(child);
+  }
+  return count;
 }
