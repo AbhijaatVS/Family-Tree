@@ -11,6 +11,7 @@ interface ProfileEditFormProps {
     slug: string,
     data: {
       name: string;
+      birthday: string;
       title: string;
       about: string;
       photo: string;
@@ -22,6 +23,7 @@ interface ProfileEditFormProps {
 export function ProfileEditForm({ person, saveAction }: ProfileEditFormProps) {
   const router = useRouter();
   const [name, setName] = useState(person.name);
+  const [birthday, setBirthday] = useState(person.birthday || "");
   const [title, setTitle] = useState(person.title);
   const [about, setAbout] = useState(person.about);
   const [photoMode, setPhotoMode] = useState<"url" | "upload">(
@@ -72,6 +74,7 @@ export function ProfileEditForm({ person, saveAction }: ProfileEditFormProps) {
     try {
       const result = await saveAction(person.slug, {
         name,
+        birthday,
         title,
         about,
         photo: finalPhoto,
@@ -127,6 +130,17 @@ export function ProfileEditForm({ person, saveAction }: ProfileEditFormProps) {
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Family member, Branch couple"
               required
+            />
+          </div>
+
+          <div className="field">
+            <label htmlFor="birthday-input" style={{ fontWeight: "700" }}>Birthday (Date & Month)</label>
+            <input
+              id="birthday-input"
+              type="text"
+              value={birthday}
+              onChange={(e) => setBirthday(e.target.value)}
+              placeholder="e.g. August 28"
             />
           </div>
         </div>

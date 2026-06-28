@@ -7,7 +7,7 @@ import { getPerson } from "@/lib/family-data";
 
 interface TreeGraphProps {
   tree: TreeNode;
-  overrides?: Record<string, { name?: string; photo?: string }>;
+  overrides?: Record<string, { name?: string; photo?: string; birthday?: string }>;
 }
 
 function FamilyTreeNode({
@@ -18,7 +18,7 @@ function FamilyTreeNode({
 }: {
   node: TreeNode;
   isRoot?: boolean;
-  overrides?: Record<string, { name?: string; photo?: string }>;
+  overrides?: Record<string, { name?: string; photo?: string; birthday?: string }>;
   depth?: number;
 }) {
   return (

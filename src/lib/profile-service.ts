@@ -5,6 +5,7 @@ import { getPerson, Person, SocialLink } from "./family-data";
 
 export interface ProfileOverride {
   name?: string;
+  birthday?: string;
   title?: string;
   about?: string;
   photo?: string;
@@ -62,7 +63,7 @@ export async function getProfileOverrides(): Promise<Record<string, ProfileOverr
     try {
       const { data: profiles, error: profileError } = await supabase
         .from("profiles")
-        .select("slug, name, title, about, photo_url");
+        .select("slug, name, birthday, title, about, photo_url");
 
       if (profileError) throw profileError;
 
@@ -77,6 +78,7 @@ export async function getProfileOverrides(): Promise<Record<string, ProfileOverr
       for (const p of profiles || []) {
         overrides[p.slug] = {
           name: p.name || undefined,
+          birthday: p.birthday || undefined,
           title: p.title || undefined,
           about: p.about || undefined,
           photo: p.photo_url || undefined,
@@ -114,6 +116,7 @@ export async function getPersonWithOverrides(slug: string): Promise<Person | nul
     return {
       ...person,
       name: override.name !== undefined ? (override.name ?? person.name) : person.name,
+      birthday: override.birthday !== undefined ? (override.birthday ?? person.birthday) : person.birthday,
       title: override.title !== undefined ? (override.title ?? person.title) : person.title,
       about: override.about !== undefined ? (override.about ?? person.about) : person.about,
       photo: override.photo !== undefined ? (override.photo ?? person.photo) : person.photo,
@@ -128,6 +131,7 @@ export async function updateProfile(
   slug: string,
   data: {
     name?: string;
+    birthday?: string;
     title?: string;
     about?: string;
     photo?: string;
@@ -141,6 +145,7 @@ export async function updateProfile(
       const { error: profileError } = await supabase.from("profiles").upsert({
         slug,
         name: data.name,
+        birthday: data.birthday,
         title: data.title,
         about: data.about,
         photo_url: data.photo,
@@ -178,6 +183,7 @@ export async function updateProfile(
   const localOverrides = readLocalOverrides();
   localOverrides[slug] = {
     name: data.name,
+    birthday: data.birthday,
     title: data.title,
     about: data.about,
     photo: data.photo,

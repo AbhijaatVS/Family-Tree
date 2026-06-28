@@ -8,6 +8,7 @@ export async function saveProfile(
   slug: string,
   data: {
     name?: string;
+    birthday?: string;
     title: string;
     about: string;
     photo: string;

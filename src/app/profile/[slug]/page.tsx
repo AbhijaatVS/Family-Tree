@@ -39,6 +39,7 @@ export default async function ProfilePage({
         <p className="profile-bio">{person.about}</p>
 
         <div className="profile-meta">
+          {person.birthday && <span className="pill">🎂 Birthday: {person.birthday}</span>}
           {parents.length > 0 && <span className="pill">Parents: {parents.map((parent) => parent.name).join(", ")}</span>}
           {children.length > 0 && <span className="pill">Children: {children.map((child) => child.name).join(", ")}</span>}
         </div>

@@ -26,6 +26,7 @@ export type Person = {
   children: string[];
   socials: SocialLink[];
   nodeId: string;
+  birthday?: string;
 };
 
 type RawTreeNode = {
