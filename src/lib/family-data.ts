@@ -266,14 +266,18 @@ function hashString(value: string) {
 function avatarDataUrl(name: string, branch: string) {
   const seed = `${name}-${branch}`;
   const hash = hashString(seed);
-  const hue = hash % 360;
-  const secondaryHue = (hue + 42) % 360;
+  const hue = 200 + (hash % 40);
+  const sat = 25 + (hash % 15);
+  const light = 42 + (hash % 12);
+  const secHue = 200 + ((hash + 20) % 40);
+  const secSat = 20 + (hash % 15);
+  const secLight = 30 + (hash % 10);
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
       <defs>
         <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="hsl(${hue} 60% 52%)" />
-          <stop offset="100%" stop-color="hsl(${secondaryHue} 44% 36%)" />
+          <stop offset="0%" stop-color="hsl(${hue} ${sat}% ${light}%)" />
+          <stop offset="100%" stop-color="hsl(${secHue} ${secSat}% ${secLight}%)" />
         </linearGradient>
       </defs>
       <rect width="900" height="900" rx="180" fill="url(#g)" />

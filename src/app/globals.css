@@ -1,16 +1,16 @@
 :root {
-  --bg: #fff8f3;
-  --bg-soft: #fff3ed;
-  --panel: rgba(255, 250, 245, 0.84);
-  --panel-strong: #fffdfb;
-  --text: #241412;
-  --muted: #6f5a54;
-  --accent: #cd1c18;
-  --accent-2: #9b1313;
-  --accent-3: #ffa896;
-  --accent-4: #38000a;
-  --border: rgba(70, 23, 20, 0.14);
-  --shadow: 0 22px 60px rgba(67, 19, 18, 0.11);
+  --bg: #f4f7fa;
+  --bg-soft: #e9f0f6;
+  --panel: rgba(240, 246, 252, 0.84);
+  --panel-strong: #ffffff;
+  --text: #233240;
+  --muted: #5a6e80;
+  --accent: #6a89a7;
+  --accent-2: #384959;
+  --accent-3: #bdddfc;
+  --accent-4: #1b2936;
+  --border: rgba(56, 73, 89, 0.15);
+  --shadow: 0 22px 60px rgba(56, 73, 89, 0.08);
 }
 
 * {
@@ -25,8 +25,8 @@ body {
   margin: 0;
   color: var(--text);
   background:
-    radial-gradient(circle at top left, rgba(205, 28, 24, 0.18), transparent 26%),
-    radial-gradient(circle at top right, rgba(255, 168, 150, 0.22), transparent 22%),
+    radial-gradient(circle at top left, rgba(106, 137, 167, 0.22), transparent 28%),
+    radial-gradient(circle at top right, rgba(189, 221, 252, 0.26), transparent 24%),
     linear-gradient(180deg, var(--bg-soft), var(--bg));
   font-family: var(--font-body), sans-serif;
 }
@@ -36,8 +36,8 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image: linear-gradient(rgba(36, 20, 18, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(36, 20, 18, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(56, 73, 89, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 73, 89, 0.04) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), transparent 95%);
 }
@@ -307,8 +307,8 @@ main {
   align-items: center;
   padding: 8px 12px;
   border-radius: 999px;
-  background: rgba(205, 28, 24, 0.12);
-  color: #9b1313;
+  background: rgba(106, 137, 167, 0.12);
+  color: #384959;
   font-weight: 700;
 }
 
@@ -404,11 +404,11 @@ main {
   overflow: auto;
   padding: 0;
   border-radius: 34px;
-  border: 1px solid rgba(70, 23, 20, 0.12);
+  border: 1px solid var(--border);
   background:
-    radial-gradient(circle at top left, rgba(255, 168, 150, 0.12), transparent 32%),
-    radial-gradient(circle at bottom right, rgba(205, 28, 24, 0.07), transparent 28%),
-    linear-gradient(180deg, rgba(255, 253, 250, 0.95), rgba(255, 247, 239, 0.88));
+    radial-gradient(circle at top left, rgba(189, 221, 252, 0.22), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(106, 137, 167, 0.12), transparent 28%),
+    linear-gradient(180deg, rgba(253, 254, 255, 0.96), rgba(240, 246, 252, 0.92));
   box-shadow: var(--shadow);
   overscroll-behavior: contain;
   scrollbar-gutter: stable both-edges;

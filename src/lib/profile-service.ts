@@ -165,7 +165,8 @@ export async function updateProfile(
 
       return { success: true };
     } catch (error) {
-      console.error("Supabase update failed, writing to local file fallback:", error);
+      console.error("Supabase update failed:", error);
+      throw error;
     }
   }
 
