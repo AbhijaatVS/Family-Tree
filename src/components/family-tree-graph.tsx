@@ -60,21 +60,62 @@ function FamilyTreeNode({
 
 export function FamilyTreeGraph({ tree, overrides }: TreeGraphProps) {
   const shellRef = useRef<HTMLDivElement>(null);
-  const [zoom, setZoom] = useState(0.35); // Start zoomed out fully to fit the tree on screen
+  const canvasRef = useRef<HTMLDivElement>(null);
+  // null = not yet calculated; will be set after first render
+  const [zoom, setZoom] = useState<number | null>(null);
 
-  const zoomIn = () => setZoom((prev) => Math.min(prev + 0.1, 1.5));
-  const zoomOut = () => setZoom((prev) => Math.max(prev - 0.1, 0.25));
+  // Calculate the zoom level that makes the whole canvas fit within the shell
+  const calcFitZoom = () => {
+    const shell = shellRef.current;
+    const canvas = canvasRef.current;
+    if (!shell || !canvas) return 0.4;
+
+    // Temporarily reset zoom so we can measure natural canvas size
+    const prevZoom = (canvas.style as any).zoom || "1";
+    (canvas.style as any).zoom = "1";
+    const naturalW = canvas.scrollWidth;
+    const naturalH = canvas.scrollHeight;
+    (canvas.style as any).zoom = prevZoom;
+
+    const shellW = shell.clientWidth;
+    const shellH = shell.clientHeight;
+
+    // Fit to both width and height, with a little padding
+    const fitW = (shellW - 32) / naturalW;
+    const fitH = (shellH - 32) / naturalH;
+
+    // Use the smaller of the two, capped between 0.15 and 1.0
+    return Math.min(Math.max(Math.min(fitW, fitH), 0.15), 1.0);
+  };
+
+  const applyFitZoom = () => {
+    const fit = calcFitZoom();
+    setZoom(fit);
+    return fit;
+  };
+
+  const zoomIn  = () => setZoom((prev) => Math.min((prev ?? 1) + 0.1, 1.5));
+  const zoomOut = () => setZoom((prev) => Math.max((prev ?? 1) - 0.1, 0.15));
   const resetZoom = () => setZoom(1.0);
-  const fitZoom = () => setZoom(0.35);
 
+  // Auto-fit on first mount + whenever the tree changes
+  useEffect(() => {
+    // Two-pass: first render at zoom=1 to get natural size, then set fit zoom
+    const fit = calcFitZoom();
+    setZoom(fit);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tree]);
+
+  // Scroll to horizontal center whenever zoom changes
   useEffect(() => {
     const shell = shellRef.current;
-    if (shell) {
-      // Scroll to horizontal center
-      const scrollTarget = (shell.scrollWidth - shell.clientWidth) / 2;
-      shell.scrollLeft = scrollTarget;
+    if (shell && zoom !== null) {
+      requestAnimationFrame(() => {
+        const scrollTarget = (shell.scrollWidth - shell.clientWidth) / 2;
+        shell.scrollLeft = scrollTarget;
+      });
     }
-  }, [tree, zoom]);
+  }, [zoom]);
 
   return (
     <div ref={shellRef} className="graph-shell" style={{ position: "relative" }}>
@@ -83,11 +124,11 @@ export function FamilyTreeGraph({ tree, overrides }: TreeGraphProps) {
         <button onClick={zoomOut} className="zoom-btn" title="Zoom Out" aria-label="Zoom Out">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
         </button>
-        <span className="zoom-value">{Math.round(zoom * 100)}%</span>
+        <span className="zoom-value">{zoom !== null ? `${Math.round(zoom * 100)}%` : "…"}</span>
         <button onClick={zoomIn} className="zoom-btn" title="Zoom In" aria-label="Zoom In">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
         </button>
-        <button onClick={fitZoom} className="zoom-btn zoom-btn--wide" title="Fit Entire Tree">
+        <button onClick={applyFitZoom} className="zoom-btn zoom-btn--wide" title="Fit Entire Tree">
           Fit
         </button>
         <button onClick={resetZoom} className="zoom-btn zoom-btn--wide" title="Actual Size (100%)">
@@ -95,7 +136,7 @@ export function FamilyTreeGraph({ tree, overrides }: TreeGraphProps) {
         </button>
       </div>
 
-      <div className="graph-canvas" style={{ zoom } as React.CSSProperties}>
+      <div ref={canvasRef} className="graph-canvas" style={{ zoom: zoom ?? 1 } as React.CSSProperties}>
         <FamilyTreeNode node={tree} isRoot overrides={overrides} />
       </div>
     </div>
