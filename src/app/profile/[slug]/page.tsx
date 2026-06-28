@@ -29,7 +29,13 @@ export default async function ProfilePage({
           <Link href="/" className="pill">
             Back to tree
           </Link>
-          <div className="pill">{person.branch} branch</div>
+          <Link
+            href={`/branch/${person.branch.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")}`}
+            className="pill"
+            style={{ textDecoration: "none" }}
+          >
+            {person.branch} branch ↗
+          </Link>
           <Link href={`/profile/${person.slug}/edit`} className="pill" style={{ background: "rgba(31, 26, 23, 0.08)", color: "var(--accent-4)" }}>
             Edit Profile
           </Link>

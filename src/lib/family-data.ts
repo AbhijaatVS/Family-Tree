@@ -173,7 +173,7 @@ const rawFamilyTree: RawTreeNode = {
     {
       members: ["Abha Singh", "Udairaj Singh"],
       children: [
-        { members: ["Sanjaya Singh", "Anu Singh"], children: [{ members: ["Ajit Singh"], children: [] }] },
+        { members: ["Sanjaya Singh", "Anu Singh"], children: [{ members: ["Ajit Singh", "Meghan"], children: [] }] },
         {
           members: ["Archana Singh", "Jitendra Bahadur Singh"],
           children: [
